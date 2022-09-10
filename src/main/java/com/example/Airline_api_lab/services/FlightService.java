@@ -20,7 +20,7 @@ public class FlightService {
 
     public List<Flight> getAllFlights(){ return flightRepository.findAll();}
 
-    public Optional<Flight> getFlightById(Long id){ return flightRepository.findById(id);}
+    public Flight getFlightById(Long id){ return flightRepository.findById(id).get();}
 
     public Flight addNewFlight(Flight flight){
         flightRepository.save(flight);
@@ -28,7 +28,7 @@ public class FlightService {
     }
 
     public Flight addPassengerToFlight(long flightId, long passengerId){
-        Flight flight = FlightRepository.findById(flightId).get();
+        Flight flight = flightRepository.findById(flightId).get();
         Passenger passenger = passengerService.getPassengerById(passengerId);
         List<Passenger> passengers = flight.getPassengers();
         passengers.add(passenger);
