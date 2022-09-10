@@ -5,10 +5,10 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.2</version>
+		<version>2.7.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.demos.bnta</groupId>
+	<groupId>com.example</groupId>
 	<artifactId>Airline_api_lab</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Airline_api_lab</name>
