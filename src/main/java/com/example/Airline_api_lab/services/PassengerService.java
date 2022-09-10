@@ -16,7 +16,7 @@ public class PassengerService {
 
     public List<Passenger> getAllPassengers(){ return passengerRepository.findAll();}
 
-    public Optional<Passenger> getPassengerById(Long id){ return passengerRepository.findById(id).get();}
+    public Optional<Passenger> getPassengerById(Long id){ return passengerRepository.findById(id);}
 
     public Passenger addNewPassenger(Passenger passenger){
         passengerRepository.save(passenger);
