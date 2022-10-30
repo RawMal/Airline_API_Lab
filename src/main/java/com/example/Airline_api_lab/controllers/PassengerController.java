@@ -10,29 +10,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/passengers")
+@RequestMapping(value = "/passengers")
 public class PassengerController {
+
+    @Autowired
+    PassengerRepository passengerRepository;
 
     @Autowired
     PassengerService passengerService;
 
     @GetMapping
     public ResponseEntity<List<Passenger>> getAllPassengers(){
-        List<Passenger> passengers = passengerService.getAllPassengers();
-        return new ResponseEntity<>(passengers, HttpStatus.OK);
+        return new ResponseEntity<>(passengerService.getAllPassengers(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Passenger> getPassengerById(@PathVariable long id){
-        Passenger passenger = passengerService.getPassengerById(id);
-        return new ResponseEntity<>(passenger, HttpStatus.OK);
+        return new ResponseEntity<>(passengerService.getPassengerById(id),HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Passenger> addNewPassenger(@RequestBody Passenger passenger){
-        Passenger savedPassenger = passengerService.addNewPassenger(passenger);
-        return new ResponseEntity<>(savedPassenger, HttpStatus.CREATED);
+    public ResponseEntity<Passenger> addPassenger(@RequestBody Passenger passenger){
+        Passenger savedPassenger = passengerService.addPassenger(passenger);
+        return new ResponseEntity<>(savedPassenger,HttpStatus.CREATED);
     }
+
 
 
 }

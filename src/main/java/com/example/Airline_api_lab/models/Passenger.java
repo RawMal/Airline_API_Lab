@@ -6,37 +6,31 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "passengers")
+@Entity
 public class Passenger {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Column(name = "name")
+    @Column
     private String name;
-
-    @Column(name = "email_address")
-    private String emailAddress;
-
+    @Column
+    private String phoneNumber;
     @ManyToMany
     @JoinTable(
             name = "flights_passengers",
             joinColumns = {@JoinColumn(name = "passenger_id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "passenger_id", nullable = false)}
+            inverseJoinColumns = {@JoinColumn(name = "flight_id", nullable = false)}
     )
     @JsonIgnoreProperties({"passengers"})
     private List<Flight> flights;
 
-    public Passenger(String name, String emailAddress, List<Flight> flights) {
+    public Passenger(String name, String phoneNumber) {
         this.name = name;
-        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
         this.flights = new ArrayList<>();
     }
 
-    public Passenger() {
-
-    }
+    public Passenger(){}
 
     public long getId() {
         return id;
@@ -54,12 +48,12 @@ public class Passenger {
         this.name = name;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public List<Flight> getFlights() {

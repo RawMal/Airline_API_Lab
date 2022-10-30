@@ -6,34 +6,31 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "flights")
+@Entity
 public class Flight {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id; // id column generates itself no need to add a @Column for it
-
-    @Column(name = "destination")
+    private long id;
+    @Column
     private String destination;
-
-    @Column(name = "capacity")
+    @Column
     private int capacity;
-
-    @Column(name = "departure_date")
+    @Column
     private String departureDate;
-
-    @Column(name = "departure_time")
+    @Column
     private String departureTime;
 
+
     @ManyToMany
-    @JoinTable(name = "flights_passengers",
+    @JoinTable(
+            name = "flights_passengers",
             joinColumns = {@JoinColumn(name = "flight_id", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "passenger_id", nullable = false)}
     )
     @JsonIgnoreProperties({"flights"})
     private List<Passenger> passengers;
 
-    public Flight(String destination, int capacity, String departureDate, String departureTime, List<Passenger> passengers) {
+    public Flight(String destination, int capacity, String departureDate, String departureTime) {
         this.destination = destination;
         this.capacity = capacity;
         this.departureDate = departureDate;
@@ -41,9 +38,7 @@ public class Flight {
         this.passengers = new ArrayList<>();
     }
 
-    public Flight() {
-
-    }
+    public Flight(){}
 
     public long getId() {
         return id;
@@ -92,5 +87,8 @@ public class Flight {
     public void setPassengers(List<Passenger> passengers) {
         this.passengers = passengers;
     }
-}
 
+    public void addPassengers(Passenger passenger){
+        passengers.add(passenger);
+    }
+}
